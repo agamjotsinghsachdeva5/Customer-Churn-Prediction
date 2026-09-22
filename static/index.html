@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Churn Prediction</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <div class="brand">Churn<span>Insight</span></div>
+</div>
+
+<div class="page-wrap">
+    <div class="hero">
+        <h1>Predict Customer Churn Risk</h1>
+        <p>Fill in the customer's profile to get an instant, explainable churn prediction.</p>
+    </div>
+
+    <form id="churnForm">
+
+        <div class="card">
+            <div class="section-title">Customer Profile</div>
+            <div class="section-subtitle">Basic details about the customer</div>
+            <div class="field-grid">
+                <div class="field">
+                    <label>Gender</label>
+                    <div class="pill-group" data-field="gender">
+                        <div class="pill active" data-value="Female">Female</div>
+                        <div class="pill" data-value="Male">Male</div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Senior Citizen</label>
+                    <div class="pill-group" data-field="SeniorCitizen">
+                        <div class="pill active" data-value="0">No</div>
+                        <div class="pill" data-value="1">Yes</div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Partner</label>
+                    <div class="pill-group" data-field="Partner">
+                        <div class="pill active" data-value="No">No</div>
+                        <div class="pill" data-value="Yes">Yes</div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Dependents</label>
+                    <div class="pill-group" data-field="Dependents">
+                        <div class="pill active" data-value="No">No</div>
+                        <div class="pill" data-value="Yes">Yes</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-title">Account Details</div>
+            <div class="section-subtitle">Contract, billing, and tenure information</div>
+            <div class="field-grid">
+                <div class="field">
+                    <label>Tenure (months)</label>
+                    <input type="number" id="tenure" min="0" max="72" value="12">
+                </div>
+                <div class="field">
+                    <label>Monthly Charges ($)</label>
+                    <input type="number" id="MonthlyCharges" step="0.01" value="70.35">
+                </div>
+                <div class="field">
+                    <label>Total Charges ($)</label>
+                    <input type="number" id="TotalCharges" step="0.01" value="845.50">
+                </div>
+                <div class="field">
+                    <label>Paperless Billing</label>
+                    <div class="pill-group" data-field="PaperlessBilling">
+                        <div class="pill active" data-value="Yes">Yes</div>
+                        <div class="pill" data-value="No">No</div>
+                    </div>
+                </div>
+            </div>
+            <div class="field-grid" style="margin-top:18px;">
+                <div class="field" style="grid-column: 1 / -1;">
+                    <label>Contract Type</label>
+                    <div class="pill-group" data-field="Contract">
+                        <div class="pill active" data-value="Month-to-month">Month-to-month</div>
+                        <div class="pill" data-value="One year">One year</div>
+                        <div class="pill" data-value="Two year">Two year</div>
+                    </div>
+                </div>
+                <div class="field" style="grid-column: 1 / -1;">
+                    <label>Payment Method</label>
+                    <div class="pill-group" data-field="PaymentMethod">
+                        <div class="pill active" data-value="Electronic check">Electronic check</div>
+                        <div class="pill" data-value="Mailed check">Mailed check</div>
+                        <div class="pill" data-value="Bank transfer (automatic)">Bank transfer</div>
+                        <div class="pill" data-value="Credit card (automatic)">Credit card</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-title">Connectivity</div>
+            <div class="section-subtitle">Phone and internet setup</div>
+            <div class="field-grid">
+                <div class="field">
+                    <label>Phone Service</label>
+                    <div class="pill-group" data-field="PhoneService">
+                        <div class="pill active" data-value="Yes">Yes</div>
+                        <div class="pill" data-value="No">No</div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Multiple Lines</label>
+                    <div class="pill-group" data-field="MultipleLines">
+                        <div class="pill active" data-value="No">No</div>
+                        <div class="pill" data-value="Yes">Yes</div>
+                    </div>
+                </div>
+                <div class="field" style="grid-column: 1 / -1;">
+                    <label>Internet Service</label>
+                    <div class="pill-group" data-field="InternetService">
+                        <div class="pill active" data-value="Fiber optic">Fiber optic</div>
+                        <div class="pill" data-value="DSL">DSL</div>
+                        <div class="pill" data-value="No">No internet</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-title">Subscribed Services</div>
+            <div class="section-subtitle">Click to select which add-on services this customer has</div>
+            <div class="services-grid" id="servicesGrid">
+                <div class="service-chip" data-field="OnlineSecurity">
+                    <span>Online Security</span><span class="check">✓</span>
+                </div>
+                <div class="service-chip" data-field="OnlineBackup">
+                    <span>Online Backup</span><span class="check">✓</span>
+                </div>
+                <div class="service-chip" data-field="DeviceProtection">
+                    <span>Device Protection</span><span class="check">✓</span>
+                </div>
+                <div class="service-chip" data-field="TechSupport">
+                    <span>Tech Support</span><span class="check">✓</span>
+                </div>
+                <div class="service-chip" data-field="StreamingTV">
+                    <span>Streaming TV</span><span class="check">✓</span>
+                </div>
+                <div class="service-chip" data-field="StreamingMovies">
+                    <span>Streaming Movies</span><span class="check">✓</span>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="predictBtn">Analyze Churn Risk</button>
+    </form>
+</div>
+
+<script src="/static/js/home.js"></script>
+</body>
+</html>
