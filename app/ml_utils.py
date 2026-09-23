@@ -180,8 +180,12 @@ def predict_customer(customer_dict: dict):
     for name, val in zip(feature_names, values):
         label, raw_value = _original_feature_info(name, df_engineered)
 
-        if isinstance(raw_value, float):
-            raw_value = round(raw_value, 2)
+    # Force raw_value into a plain, JSON-safe Python type
+        if raw_value is not None:
+            if hasattr(raw_value, 'item'):  # covers numpy int64, float64, bool_, etc.
+                raw_value = raw_value.item()
+            if isinstance(raw_value, float):
+                raw_value = round(raw_value, 2)
 
         shap_explanation.append({
             "feature": label,
