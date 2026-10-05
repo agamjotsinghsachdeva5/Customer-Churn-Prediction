@@ -26,6 +26,10 @@ body {
     line-height: 1.5;
 }
 
+body.index-page {
+    background: #dff7df;
+}
+
 .navbar {
     background: var(--card);
     border-bottom: 1px solid var(--border);
