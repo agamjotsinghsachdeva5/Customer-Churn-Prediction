@@ -26,7 +26,16 @@ body {
     line-height: 1.5;
 }
 
+html:has(body.index-page),
 body.index-page {
+    background: #dff7df;
+}
+
+body.index-page .navbar {
+    background: #f3fff3;
+}
+
+body.index-page .page-wrap {
     background: #dff7df;
 }
 
